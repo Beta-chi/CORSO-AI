@@ -3,33 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio AI per la Didattica</title>
+    <title>Laboratorio AI per la Didattica - Scuola Secondaria</title>
     <style>
         :root {
-            --primary: #4F46E5;
-            --primary-light: #818CF8;
-            --bg-color: #F9FAFB;
-            --text-color: #1F2937;
-            --card-bg: #FFFFFF;
-            --border-color: #E5E7EB;
+            --primary-color: #0F172A; /* Blu notte molto scuro */
+            --secondary-color: #334155; /* Grigio ardesia */
+            --accent-color: #0369A1; /* Blu istituzionale per i dettagli */
+            --bg-color: #F8FAFC;
+            --surface-color: #FFFFFF;
+            --border-color: #E2E8F0;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Tipografia Accademica per i titoli */
+        h1, h2, h3, h4 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: var(--primary-color);
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
+            background-color: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
             padding: 4rem 2rem;
             text-align: center;
         }
@@ -37,45 +46,65 @@
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            font-weight: normal;
         }
 
         header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
         }
 
         section {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            background-color: var(--surface-color);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
             border: 1px solid var(--border-color);
         }
 
         h2 {
-            color: var(--primary);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.5rem;
+            font-size: 1.8rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
             margin-bottom: 1.5rem;
+            font-weight: normal;
         }
 
         h3 {
-            margin-top: 1.5rem;
+            font-size: 1.3rem;
+            margin-top: 2rem;
             margin-bottom: 0.5rem;
-            color: #374151;
         }
 
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.2s ease;
+        }
+
+        a:hover {
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        /* Griglia per il confronto */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 2rem;
+            margin-top: 1.5rem;
         }
 
         @media (max-width: 768px) {
@@ -85,123 +114,136 @@
         }
 
         .bot-card {
-            background-color: #F3F4F6;
+            background-color: var(--bg-color);
             padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
+            border-top: 3px solid var(--secondary-color);
         }
 
         .bot-card h4 {
             font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
+        /* Stile professionale per i prompt */
         .prompt-box {
-            background-color: #111827;
-            color: #10B981;
-            padding: 1rem;
-            border-radius: 6px;
-            font-family: monospace;
+            background-color: #F1F5F9;
+            color: var(--secondary-color);
+            padding: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
             margin: 1rem 0;
-            overflow-x: auto;
+            border-left: 4px solid var(--accent-color);
+            line-height: 1.5;
         }
 
         .tag {
             display: inline-block;
-            background-color: var(--primary-light);
-            color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             margin-bottom: 0.5rem;
         }
 
         ul {
             margin-left: 1.5rem;
             margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
         }
 
         footer {
             text-align: center;
             padding: 2rem;
-            color: #6B7280;
+            color: var(--text-muted);
             font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--surface-color);
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🤖 Laboratorio di AI per la Didattica</h1>
-        <p>Scuola Secondaria di II Grado | Strumenti e pratiche per docenti innovativi</p>
+        <h1>Laboratorio di Intelligenza Artificiale per la Didattica</h1>
+        <p>Scuola Secondaria di II Grado &mdash; Materiali e Strumenti per i Docenti</p>
     </header>
 
     <div class="container">
         
         <section id="intro">
-            <h2>Introduzione: L'AI come Assistente Didattico</h2>
-            <p>L'Intelligenza Artificiale Generativa non è qui per sostituire il docente, ma per agire come un <strong>co-pilota instancabile</strong>. Può aiutarti a superare il "blocco della pagina bianca" nella progettazione, a personalizzare i materiali per studenti con BES/DSA e a creare simulazioni interattive.</p>
+            <h2>L'Intelligenza Artificiale come Supporto Metodologico</h2>
+            <p>L'Intelligenza Artificiale Generativa si inserisce nella pratica didattica non come sostituto della funzione docente, ma come un <strong>supporto operativo</strong>. Lo scopo di questo laboratorio è esplorare come utilizzare i Modelli Linguistici di Grandi Dimensioni (LLM) per ottimizzare i tempi di progettazione, differenziare i materiali e strutturare strumenti di valutazione complessi.</p>
         </section>
 
         <section id="tools">
-            <h2>I Protagonisti: Claude vs Gemini</h2>
+            <h2>Analisi Comparativa: Claude e Gemini</h2>
+            <p>Non tutti i modelli linguistici operano allo stesso modo. Di seguito un confronto tra due degli strumenti più efficaci attualmente a disposizione del corpo docente.</p>
             <div class="grid">
                 <div class="bot-card">
                     <h4>Anthropic Claude</h4>
                     <ul>
-                        <li><strong>Punto di forza:</strong> Qualità della scrittura, empatia e gestione di testi molto lunghi.</li>
-                        <li><strong>Ideale per:</strong> Analisi di lunghi PDF, stesura di saggi, creazione di rubriche di valutazione complesse, role-playing umanistici.</li>
-                        <li><strong>Stile:</strong> Preciso, sfumato, segue le istruzioni con grande rigore.</li>
+                        <li><strong>Caratteristiche:</strong> Elevata coerenza testuale, capacità di gestire documenti molto lunghi e attenzione alle sfumature linguistiche.</li>
+                        <li><strong>Applicazioni didattiche:</strong> Analisi di documenti normativi o saggi complessi, elaborazione di griglie di valutazione dettagliate, simulazioni umanistiche.</li>
+                        <li><strong>Profilo d'uso:</strong> Rigoroso, segue istruzioni complesse con precisione analitica.</li>
                     </ul>
                 </div>
                 <div class="bot-card">
                     <h4>Google Gemini</h4>
                     <ul>
-                        <li><strong>Punto di forza:</strong> Accesso al web in tempo reale e integrazione con l'ecosistema Google (Docs, Drive, Gmail).</li>
-                        <li><strong>Ideale per:</strong> Ricerche aggiornate, generazione di idee rapide, analisi di immagini e grafici scientifici.</li>
-                        <li><strong>Stile:</strong> Veloce, schematico, eccellente per materie STEM e sintesi rapide.</li>
+                        <li><strong>Caratteristiche:</strong> Connessione al web in tempo reale, multimodalità avanzata e sinergia con Google Workspace.</li>
+                        <li><strong>Applicazioni didattiche:</strong> Ricerca di informazioni attualizzate, sintesi di concetti scientifici, analisi di grafici e immagini.</li>
+                        <li><strong>Profilo d'uso:</strong> Rapido, schematico, particolarmente performante nelle discipline STEM.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <section id="lab">
-            <h2>💻 Hands-on: Esercitazione Pratica</h2>
-            <p>Aprite <a href="https://claude.ai" target="_blank">Claude.ai</a> in una scheda e <a href="https://gemini.google.com" target="_blank">Gemini</a> in un'altra. Provate a copiare e personalizzare questi prompt (istruzioni). <br><em>La regola d'oro del Prompting: <strong>Ruolo + Compito + Contesto + Formato.</strong></em></p>
+            <h2>Esercitazione Pratica (Hands-on)</h2>
+            <p>Si invitano i docenti ad aprire le piattaforme <a href="https://claude.ai" target="_blank">Claude</a> e <a href="https://gemini.google.com" target="_blank">Gemini</a> in due finestre separate per testare direttamente i comandi operativi (prompt) proposti di seguito.</p>
+            <p><em>Nota metodologica per il Prompting: strutturare sempre la richiesta secondo lo schema <strong>Ruolo + Compito + Contesto + Formato richiesto.</strong></em></p>
 
-            <h3>1. Progettazione di un'UDA (Unità di Apprendimento)</h3>
-            <span class="tag">Per tutte le materie</span>
+            <h3>1. Progettazione di un'Unità di Apprendimento (UDA)</h3>
+            <span class="tag">Trasversale a tutte le discipline</span>
             <div class="prompt-box">
-                Agisci come un docente esperto di [TUA MATERIA] di liceo. Crea una bozza per un'Unità di Apprendimento di 4 ore sull'argomento "[INSERISCI ARGOMENTO]". Includi: obiettivi di apprendimento (sapere e saper fare), un'attività pratica per la classe divisa in gruppi e un'idea per un compito di realtà finale. Formatta il tutto con elenchi puntati.
+                Agisci come un docente esperto di [INSERIRE MATERIA] della scuola secondaria di secondo grado. Elabora una bozza strutturata per un'Unità di Apprendimento della durata di 4 ore incentrata su "[INSERIRE ARGOMENTO]". La struttura deve includere: prerequisiti, obiettivi di apprendimento (declinati in conoscenze e abilità), proposta per un'attività laboratoriale cooperativa e indicazioni per un compito di realtà finale. Restituisci il testo utilizzando elenchi puntati per favorire la leggibilità.
             </div>
 
-            <h3>2. Inclusione e Personalizzazione (BES/DSA)</h3>
-            <span class="tag">Inclusione</span>
+            <h3>2. Differenziazione Didattica e Inclusione (BES/DSA)</h3>
+            <span class="tag">Didattica Inclusiva</span>
             <div class="prompt-box">
-                Prendi il testo seguente e riscrivilo per un alunno di 15 anni con DSA. Usa frasi brevi, sintassi semplice (Soggetto, Verbo, Complemento), elenchi puntati ed evidenzia in grassetto i concetti chiave. Alla fine, genera un glossario di 5 parole difficili con spiegazione semplificata.<br><br>[INCOLLA QUI IL TESTO DEL LIBRO O DEGLI APPUNTI]
+                Analizza il testo seguente e rielaboralo per renderlo accessibile a uno studente di 15 anni con dislessia. Applica le seguenti regole: utilizza un costrutto sintattico lineare (Soggetto, Verbo, Complemento), frasi brevi, elenchi puntati per i passaggi consequenziali ed evidenzia in grassetto esclusivamente i tre concetti fondamentali. Aggiungi in calce un breve glossario per i termini complessi.
+                <br><br>
+                Testo di partenza: [INCOLLARE IL TESTO DEL MANUALE]
             </div>
 
-            <h3>3. Creazione di una Rubrica di Valutazione</h3>
-            <span class="tag">Valutazione</span>
+            <h3>3. Elaborazione di una Griglia di Valutazione</h3>
+            <span class="tag">Docimologia e Valutazione</span>
             <div class="prompt-box">
-                Crea una rubrica di valutazione in formato tabella per valutare [ES: un saggio breve / un esperimento di laboratorio / una presentazione su PowerPoint]. I criteri devono essere 4 (es. Contenuto, Esposizione, Originalità, Lavoro di gruppo). Usa una scala da 1 (Insufficiente) a 4 (Eccellente), descrivendo esattamente cosa lo studente deve fare per ottenere ogni punteggio.
+                Costruisci una rubrica di valutazione analitica, formattata come tabella, per la valutazione di [INSERIRE TIPOLOGIA DI PROVA, es: un debate in classe / una relazione di laboratorio / un elaborato multimediale]. Individua 4 indicatori specifici. Per ciascun indicatore, declina i descrittori su una scala di 4 livelli (da Iniziale ad Avanzato), esplicitando in modo inequivocabile le evidenze osservabili richieste per l'attribuzione di ciascun livello.
             </div>
         </section>
 
         <section id="tips">
-            <h2>⚠️ Regole d'Oro e Best Practices</h2>
+            <h2>Linee Guida e Avvertenze Deontologiche</h2>
             <ul>
-                <li><strong>Attenzione alle Allucinazioni:</strong> L'AI a volte inventa dati (nomi, date, fonti) pur sembrando sicura di sé. Il docente deve sempre verificare la veridicità dei contenuti generati.</li>
-                <li><strong>Privacy degli studenti:</strong> Non inserire mai nomi, cognomi o dati sensibili degli alunni nelle chat dell'AI.</li>
-                <li><strong>Iterazione:</strong> Il primo risultato raramente è perfetto. "Conversa" con l'AI chiedendo aggiustamenti (es. <em>"Rendi il tono più formale", "Aggiungi un esempio pratico", "Accorcia il testo del 30%"</em>).</li>
+                <li><strong>Verifica delle Fonti (Allucinazioni):</strong> I modelli generativi possono produrre informazioni plausibili ma errate (date, riferimenti bibliografici, eventi storici). È imprescindibile la validazione dei contenuti da parte del docente prima della somministrazione agli studenti.</li>
+                <li><strong>Tutela della Privacy:</strong> È severamente sconsigliato l'inserimento di dati personali, nomi, cognomi o informazioni sensibili relative agli studenti all'interno delle piattaforme di AI.</li>
+                <li><strong>Processo Iterativo:</strong> L'interazione con l'AI non si esaurisce con il primo prompt. Si suggerisce di affinare il risultato richiedendo revisioni (es. <em>"Riformula utilizzando un registro linguistico più formale", "Sintetizza in massimo 200 parole"</em>).</li>
             </ul>
         </section>
 
     </div>
 
     <footer>
-        <p>Materiale creato per il Laboratorio Docenti - Modificare e riutilizzare liberamente.</p>
+        <p>&copy; 2024 - Materiale didattico a uso interno. Riproduzione e modifica consentite per finalità formative.</p>
     </footer>
 
 </body>
