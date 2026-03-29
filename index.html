@@ -3,71 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio AI per Docenti</title>
+    <title>Gemini 3 Didattica Hub</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
     <style>
-        /* CSS: Gestisce l'aspetto estetico */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f4f7f6; }
-        header { background-color: #2c3e50; color: white; padding: 1rem; text-align: center; border-radius: 8px; margin-bottom: 20px; }
-        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .tab-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
-        button { padding: 10px 20px; cursor: pointer; border: none; background-color: #bdc3c7; border-radius: 5px; transition: 0.3s; }
-        button.active { background-color: #3498db; color: white; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .prompt-box { background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin-top: 10px; border-radius: 4px; }
-        pre { background: #eee; padding: 10px; overflow-x: auto; border-radius: 4px; }
+        @import url('[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap)');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+       .gradient-text { background: linear-gradient(90deg, #4285F4, #9b51e0, #ea4335); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+       .card { background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); transition: transform 0.2s; }
+       .card:hover { transform: translateY(-4px); }
+       .bar { transition: height 0.3s ease, background-color 0.3s ease; }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-8">
+    <header class="max-w-6xl mx-auto text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Gemini 3 per la Scuola Secondaria</h1>
+        <p class="text-gray-600 text-lg">Strumenti interattivi per la lezione laboratoriale di Informatica</p>
+    </header>
 
-<header>
-    <h1>AI nella Didattica: Claude vs Gemini</h1>
-    <p>Laboratorio Pratico per Docenti di Scuola Secondaria</p>
-</header>
+    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <section class="card p-6 border-t-4 border-blue-500">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">🚀</span> Ecosistema Gemini 3
+            </h2>
+            <div class="space-y-4">
+                <div class="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                    <h3 class="font-semibold text-blue-700">Gemini 3 Flash</h3>
+                    <p class="text-sm text-blue-600">Ottimizzato per velocità e compiti rapidi (Quiz, feedback immediati).</p>
+                </div>
+                <div class="p-3 bg-purple-50 rounded-lg border border-purple-100">
+                    <h3 class="font-semibold text-purple-700">Gemini 3 Pro</h3>
+                    <p class="text-sm text-purple-600">Multimodale e window di contesto da 1M di token. Ideale per analisi complesse.</p>
+                </div>
+                <div class="p-3 bg-red-50 rounded-lg border border-red-100">
+                    <h3 class="font-semibold text-red-700">Gemini 3 Ultra</h3>
+                    <p class="text-sm text-red-600">Massima potenza per Deep Research e coding avanzato.</p>
+                </div>
+            </div>
+        </section>
 
-<div class="container">
-    <div class="tab-buttons">
-        <button onclick="openTab('claude')" id="defaultOpen">Focus su Claude</button>
-        <button onclick="openTab('gemini')">Focus su Gemini</button>
-    </div>
+        <section class="card p-6 border-t-4 border-green-500">
+            <h2 class="text-2xl font-bold mb-2 flex items-center">
+                <span class="mr-2">💻</span> Vibe Coding: Sorting Visualizer
+            </h2>
+            <p class="text-sm text-gray-500 mb-6">Dimostrazione di una simulazione generata via IA (Bubble Sort).</p>
+            
+            <div id="visualizer-container" class="h-48 flex items-end justify-center gap-1 bg-gray-900 rounded-lg p-4 mb-4">
+                </div>
 
-    <div id="claude" class="tab-content">
-        <h2>Claude (Anthropic)</h2>
-        <p>Ideale per: Scrittura creativa, analisi di testi lunghi e sfumature linguistiche.</p>
-        <div class="prompt-box">
-            <strong>Esercitazione:</strong> Prova a caricare un PDF di un autore classico e chiedi a Claude di creare un'intervista impossibile.
-        </div>
-    </div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="generateArray()" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded font-medium transition">Nuovo Array</button>
+                <button onclick="bubbleSort()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-medium transition">Avvia Bubble Sort</button>
+            </div>
+            <div id="stats" class="mt-4 text-sm font-mono text-gray-600">
+                Complessità: O(n²) | Swap: <span id="swap-count">0</span>
+            </div>
+        </section>
 
-    <div id="gemini" class="tab-content">
-        <h2>Gemini (Google)</h2>
-        <p>Ideale per: Integrazione con Google Workspace, ricerca dati in tempo reale e spiegazioni multimodali.</p>
-        <div class="prompt-box">
-            <strong>Esercitazione:</strong> Chiedi a Gemini di creare una tabella di marcia per una gita scolastica usando i dati di Google Maps.
-        </div>
-    </div>
-</div>
+        <section class="card p-6 border-t-4 border-yellow-500 lg:col-span-2">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2">✍️</span> Prompt Engineering Lab (Framework R-C-T-F)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Ruolo</label>
+                    <input id="role" type="text" placeholder="Es: Docente Informatico" class="w-full border p-2 rounded mt-1">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Contesto</label>
+                    <input id="context" type="text" placeholder="Es: Classe IV Liceo" class="w-full border p-2 rounded mt-1">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Task</label>
+                    <input id="task" type="text" placeholder="Es: Spiega il TCP/IP" class="w-full border p-2 rounded mt-1">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Formato</label>
+                    <input id="format" type="text" placeholder="Es: Tabella comparativa" class="w-full border p-2 rounded mt-1">
+                </div>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg border">
+                <h3 class="text-sm font-bold text-gray-700 mb-2">Prompt Generato:</h3>
+                <p id="final-prompt" class="italic text-gray-600">Compila i campi sopra per vedere il prompt strutturato...</p>
+                <button onclick="copyPrompt()" class="mt-4 text-blue-600 text-sm font-semibold hover:underline">Copia per Gemini</button>
+            </div>
+        </section>
+    </main>
 
-<script>
-    /* JavaScript: Gestisce l'interattività delle schede */
-    function openTab(tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-            tabcontent[i].classList.remove("active");
+    <footer class="mt-12 text-center text-gray-400 text-sm">
+        <p>Progetto per Corso di Formazione Docenti 2026 - IA nella Didattica</p>
+    </footer>
+
+    <script>
+        // Sorting Visualizer Logic
+        let array =;
+        const container = document.getElementById('visualizer-container');
+        let swaps = 0;
+
+        function generateArray() {
+            array =;
+            container.innerHTML = '';
+            swaps = 0;
+            document.getElementById('swap-count').innerText = swaps;
+            for (let i = 0; i < 30; i++) {
+                const val = Math.floor(Math.random() * 90) + 10;
+                array.push(val);
+                const bar = document.createElement('div');
+                bar.style.height = `${val}%`;
+                bar.className = 'bar bg-blue-400 w-2 md:w-4 rounded-t';
+                container.appendChild(bar);
+            }
         }
-        tablinks = document.getElementsByTagName("button");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active");
-        }
-        document.getElementById(tabName).style.display = "block";
-        event.currentTarget.classList.add("active");
-    }
-    
-    // Apre la prima scheda all'avvio
-    document.getElementById("defaultOpen").click();
-</script>
 
+        async function bubbleSort() {
+            const bars = container.children;
+            for (let i = 0; i < array.length; i++) {
+                for (let j = 0; j < array.length - i - 1; j++) {
+                    bars[j].classList.replace('bg-blue-400', 'bg-red-400');
+                    bars[j+1].classList.replace('bg-blue-400', 'bg-red-400');
+                    
+                    if (array[j] > array[j + 1]) {
+                        await new Promise(r => setTimeout(r, 50));
+                        [array[j], array[j + 1]] = [array[j + 1], array[j]];
+                        bars[j].style.height = `${array[j]}%`;
+                        bars[j + 1].style.height = `${array[j + 1]}%`;
+                        swaps++;
+                        document.getElementById('swap-count').innerText = swaps;
+                    }
+                    
+                    bars[j].classList.replace('bg-red-400', 'bg-blue-400');
+                    bars[j+1].classList.replace('bg-red-400', 'bg-blue-400');
+                }
+                bars[array.length - i - 1].classList.replace('bg-blue-400', 'bg-green-500');
+            }
+        }
+
+        // Prompt Builder Logic
+        const inputs = ['role', 'context', 'task', 'format'];
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', updatePrompt);
+        });
+
+        function updatePrompt() {
+            const r = document.getElementById('role').value;
+            const c = document.getElementById('context').value;
+            const t = document.getElementById('task').value;
+            const f = document.getElementById('format').value;
+            
+            if(r |
+
+| c |
+| t |
+| f) {
+                document.getElementById('final-prompt').innerText = 
+                    `Agisci come ${r |
+
+| ''}. Il contesto è ${c |
+| ''}. Il tuo compito è: ${t |
+| ''}. Fornisci l'output in formato ${f |
+| ''}.`;
+            }
+        }
+
+        function copyPrompt() {
+            const text = document.getElementById('final-prompt').innerText;
+            navigator.clipboard.writeText(text);
+            alert('Prompt copiato!');
+        }
+
+        generateArray();
+    </script>
 </body>
 </html>
