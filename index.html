@@ -3,209 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio AI per la Didattica - Scuola Secondaria di II Grado</title>
+    <title>Laboratorio AI per Docenti</title>
     <style>
-        :root {
-            --primary-color: #0F172A; /* Blu notte molto scuro */
-            --secondary-color: #334155; /* Grigio ardesia */
-            --accent-color: #0369A1; /* Blu istituzionale per pulsanti/dettagli */
-            --bg-color: #F8FAFC;
-            --surface-color: #FFFFFF;
-            --border-color: #E2E8F0;
-            --text-main: #1E293B;
-            --text-muted: #64748B;
-        }
+        /* CSS: Gestisce l'aspetto estetico */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f4f7f6; }
+        header { background-color: #2c3e50; color: white; padding: 1rem; text-align: center; border-radius: 8px; margin-bottom: 20px; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .tab-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
+        button { padding: 10px 20px; cursor: pointer; border: none; background-color: #bdc3c7; border-radius: 5px; transition: 0.3s; }
+        button.active { background-color: #3498db; color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .prompt-box { background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin-top: 10px; border-radius: 4px; }
+        pre { background: #eee; padding: 10px; overflow-x: auto; border-radius: 4px; }
+    </style>
+</head>
+<body>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<header>
+    <h1>AI nella Didattica: Claude vs Gemini</h1>
+    <p>Laboratorio Pratico per Docenti di Scuola Secondaria</p>
+</header>
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.7;
-            font-size: 16px;
-        }
+<div class="container">
+    <div class="tab-buttons">
+        <button onclick="openTab('claude')" id="defaultOpen">Focus su Claude</button>
+        <button onclick="openTab('gemini')">Focus su Gemini</button>
+    </div>
 
-        /* Tipografia Accademica */
-        h1, h2, h3, h4 {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            color: var(--primary-color);
-            font-weight: normal;
-        }
+    <div id="claude" class="tab-content">
+        <h2>Claude (Anthropic)</h2>
+        <p>Ideale per: Scrittura creativa, analisi di testi lunghi e sfumature linguistiche.</p>
+        <div class="prompt-box">
+            <strong>Esercitazione:</strong> Prova a caricare un PDF di un autore classico e chiedi a Claude di creare un'intervista impossibile.
+        </div>
+    </div>
 
-        /* Header Documentale */
-        header {
-            background-color: var(--surface-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding: 3rem 2rem;
-            position: relative;
-        }
+    <div id="gemini" class="tab-content">
+        <h2>Gemini (Google)</h2>
+        <p>Ideale per: Integrazione con Google Workspace, ricerca dati in tempo reale e spiegazioni multimodali.</p>
+        <div class="prompt-box">
+            <strong>Esercitazione:</strong> Chiedi a Gemini di creare una tabella di marcia per una gita scolastica usando i dati di Google Maps.
+        </div>
+    </div>
+</div>
 
-        .header-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
+<script>
+    /* JavaScript: Gestisce l'interattività delle schede */
+    function openTab(tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            tabcontent[i].classList.remove("active");
         }
-
-        .doc-emblem {
-            max-width: 80px;
-            height: auto;
-            margin-bottom: 1.5rem;
+        tablinks = document.getElementsByTagName("button");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
         }
+        document.getElementById(tabName).style.display = "block";
+        event.currentTarget.classList.add("active");
+    }
+    
+    // Apre la prima scheda all'avvio
+    document.getElementById("defaultOpen").click();
+</script>
 
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
-        }
-
-        header p {
-            font-size: 1rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        }
-
-        /* Pulsante Stampa Documento */
-        .print-btn {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 16px;
-            background-color: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .print-btn:hover {
-            background-color: var(--bg-color);
-            color: var(--primary-color);
-        }
-
-        .print-icon {
-            margin-right: 8px;
-            opacity: 0.7;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2.5rem 2rem;
-        }
-
-        section {
-            background-color: var(--surface-color);
-            padding: 2.5rem;
-            margin-bottom: 2.5rem;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            font-size: 1.7rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        h3 {
-            font-size: 1.3rem;
-            margin-top: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-        }
-
-        a.doc-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-        }
-
-        a.doc-link:hover {
-            border-bottom: 1px solid var(--accent-color);
-        }
-
-        /* Griglia per il confronto */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .bot-card {
-            background-color: var(--bg-color);
-            padding: 2rem;
-            border-top: 4px solid var(--secondary-color);
-            text-align: center;
-        }
-
-        .bot-logo {
-            max-width: 60px;
-            height: auto;
-            margin-bottom: 1rem;
-        }
-
-        .bot-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .bot-card ul {
-            text-align: left;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Pulsante Documentale */
-        .btn-access {
-            display: inline-flex;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: var(--surface-color);
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-access:hover {
-            background-color: var(--primary-color);
-            color: var(--surface-color);
-        }
-
-        /* Stile professionale per i prompt */
-        .prompt-container {
-            position: relative;
-            margin: 1.5rem 0;
-        }
-
-        .prompt-box {
-            background-color: #F1F5F9;
-            color:
+</body>
+</html>
