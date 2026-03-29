@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio AI per la Didattica - Scuola Secondaria</title>
+    <title>Laboratorio AI per la Didattica - Scuola Secondaria di II Grado</title>
     <style>
         :root {
             --primary-color: #0F172A; /* Blu notte molto scuro */
             --secondary-color: #334155; /* Grigio ardesia */
-            --accent-color: #0369A1; /* Blu istituzionale per i dettagli */
+            --accent-color: #0369A1; /* Blu istituzionale per pulsanti/dettagli */
             --bg-color: #F8FAFC;
             --surface-color: #FFFFFF;
             --border-color: #E2E8F0;
@@ -30,37 +30,78 @@
             font-size: 16px;
         }
 
-        /* Tipografia Accademica per i titoli */
+        /* Tipografia Accademica */
         h1, h2, h3, h4 {
             font-family: Georgia, 'Times New Roman', Times, serif;
             color: var(--primary-color);
+            font-weight: normal;
         }
 
+        /* Header Documentale */
         header {
             background-color: var(--surface-color);
-            border-bottom: 1px solid var(--border-color);
-            padding: 4rem 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding: 3rem 2rem;
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
             text-align: center;
+        }
+
+        .doc-emblem {
+            max-width: 80px;
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
         }
 
         header h1 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: normal;
+            margin-bottom: 0.8rem;
         }
 
         header p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        /* Pulsante Stampa Documento */
+        .print-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .print-btn:hover {
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+        }
+
+        .print-icon {
+            margin-right: 8px;
+            opacity: 0.7;
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 2.5rem 2rem;
         }
 
         section {
@@ -68,14 +109,14 @@
             padding: 2.5rem;
             margin-bottom: 2.5rem;
             border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         h2 {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.8rem;
             margin-bottom: 1.5rem;
-            font-weight: normal;
         }
 
         h3 {
@@ -88,14 +129,13 @@
             margin-bottom: 1rem;
         }
 
-        a {
+        a.doc-link {
             color: var(--accent-color);
             text-decoration: none;
             border-bottom: 1px solid transparent;
-            transition: border-bottom 0.2s ease;
         }
 
-        a:hover {
+        a.doc-link:hover {
             border-bottom: 1px solid var(--accent-color);
         }
 
@@ -104,7 +144,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
 
         @media (max-width: 768px) {
@@ -115,27 +155,89 @@
 
         .bot-card {
             background-color: var(--bg-color);
-            padding: 1.5rem;
-            border-top: 3px solid var(--secondary-color);
+            padding: 2rem;
+            border-top: 4px solid var(--secondary-color);
+            text-align: center;
+        }
+
+        .bot-logo {
+            max-width: 60px;
+            height: auto;
+            margin-bottom: 1rem;
+            opacity: 0.8;
         }
 
         .bot-card h4 {
             font-size: 1.2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
+        .bot-card ul {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Pulsante Documentale */
+        .btn-access {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: var(--surface-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-access:hover {
+            background-color: var(--primary-color);
+            color: var(--surface-color);
+        }
+
         /* Stile professionale per i prompt */
+        .prompt-container {
+            position: relative;
+            margin: 1.5rem 0;
+        }
+
         .prompt-box {
             background-color: #F1F5F9;
             color: var(--secondary-color);
             padding: 1.5rem;
+            padding-right: 120px; /* Spazio per il pulsante copia */
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.95rem;
-            margin: 1rem 0;
             border-left: 4px solid var(--accent-color);
-            line-height: 1.5;
+            line-height: 1.6;
+        }
+
+        /* Pulsante Copia */
+        .btn-copy {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            padding: 6px 12px;
+            background-color: var(--surface-color);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-copy:hover {
+            color: var(--primary-color);
+            border-color: var(--text-muted);
         }
 
         .tag {
@@ -148,38 +250,58 @@
             margin-bottom: 0.5rem;
         }
 
-        ul {
+        ul.doc-list {
             margin-left: 1.5rem;
             margin-bottom: 1rem;
             color: var(--text-main);
         }
 
-        li {
-            margin-bottom: 0.5rem;
+        ul.doc-list li {
+            margin-bottom: 0.8rem;
         }
 
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
             color: var(--text-muted);
             font-size: 0.9rem;
             border-top: 1px solid var(--border-color);
             background-color: var(--surface-color);
         }
+
+        /* SVG Icons */
+        .icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            margin-right: 6px;
+        }
+
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Laboratorio di Intelligenza Artificiale per la Didattica</h1>
-        <p>Scuola Secondaria di II Grado &mdash; Materiali e Strumenti per i Docenti</p>
+        <button class="print-btn" onclick="window.print()">
+            <svg class="icon print-icon" viewBox="0 0 512 512"><path d="M448 192V77.25c0-8.49-3.37-16.62-9.37-22.63L393.37 9.37c-6-6-14.14-9.37-22.63-9.37H112c-17.67 0-32 14.33-32 32V192c-44.18 0-80 35.82-80 80v128c0 17.67 14.33 32 32 32h48v64c0 17.67 14.33 32 32 32h256c17.67 0 32-14.33 32-32v-64h48c17.67 0 32-14.33 32-32V272c0-44.18-35.82-80-80-80zM128 44h212v68h68v80H128V44zm256 388H128v-96h256v96z"/></svg>
+            Stampa o Salva PDF
+        </button>
+
+        <div class="header-content">
+            <img src="/api/placeholder/80/80" alt="Emblema Documento Istituzionale" class="doc-emblem">
+            <h1>Laboratorio di Intelligenza Artificiale per la Didattica</h1>
+            <p>Scuola Secondaria di II Grado &mdash; Materiali e Strumenti per i Docenti</p>
+        }
     </header>
 
     <div class="container">
         
         <section id="intro">
             <h2>L'Intelligenza Artificiale come Supporto Metodologico</h2>
-            <p>L'Intelligenza Artificiale Generativa si inserisce nella pratica didattica non come sostituto della funzione docente, ma come un <strong>supporto operativo</strong>. Lo scopo di questo laboratorio è esplorare come utilizzare i Modelli Linguistici di Grandi Dimensioni (LLM) per ottimizzare i tempi di progettazione, differenziare i materiali e strutturare strumenti di valutazione complessi.</p>
+            <div style="display: flex; align-items: flex-start; gap: 1.5rem;">
+                <img src="/api/placeholder/60/60" alt="Icona Introduzione" style="max-width: 60px; opacity: 0.6; margin-top: 5px;">
+                <p>L'Intelligenza Artificiale Generativa si inserisce nella pratica didattica non come sostituto della funzione docente, ma come un <strong>supporto operativo</strong>. Lo scopo di questo laboratorio è esplorare come utilizzare i Modelli Linguistici di Grandi Dimensioni (LLM) per ottimizzare i tempi di progettazione, differenziare i materiali e strutturare strumenti di valutazione complessi.</p>
+            </div>
         </section>
 
         <section id="tools">
@@ -187,64 +309,110 @@
             <p>Non tutti i modelli linguistici operano allo stesso modo. Di seguito un confronto tra due degli strumenti più efficaci attualmente a disposizione del corpo docente.</p>
             <div class="grid">
                 <div class="bot-card">
+                    <img src="/api/placeholder/60/60" alt="Logo Claude Anthropic" class="bot-logo">
                     <h4>Anthropic Claude</h4>
-                    <ul>
-                        <li><strong>Caratteristiche:</strong> Elevata coerenza testuale, capacità di gestire documenti molto lunghi e attenzione alle sfumature linguistiche.</li>
-                        <li><strong>Applicazioni didattiche:</strong> Analisi di documenti normativi o saggi complessi, elaborazione di griglie di valutazione dettagliate, simulazioni umanistiche.</li>
-                        <li><strong>Profilo d'uso:</strong> Rigoroso, segue istruzioni complesse con precisione analitica.</li>
+                    <ul class="doc-list">
+                        <li>Elevata coerenza testuale e gestione di documenti molto lunghi.</li>
+                        <li>Ideale per l'analisi di testi normativi o saggi complessi e l'elaborazione di griglie di valutazione dettagliate.</li>
+                        <li>Rigoroso, segue istruzioni complesse con precisione analitica.</li>
                     </ul>
+                    <a href="https://claude.ai" target="_blank" class="btn-access">Accedi a Claude</a>
                 </div>
                 <div class="bot-card">
+                    <img src="/api/placeholder/60/60" alt="Logo Google Gemini" class="bot-logo">
                     <h4>Google Gemini</h4>
-                    <ul>
-                        <li><strong>Caratteristiche:</strong> Connessione al web in tempo reale, multimodalità avanzata e sinergia con Google Workspace.</li>
-                        <li><strong>Applicazioni didattiche:</strong> Ricerca di informazioni attualizzate, sintesi di concetti scientifici, analisi di grafici e immagini.</li>
-                        <li><strong>Profilo d'uso:</strong> Rapido, schematico, particolarmente performante nelle discipline STEM.</li>
+                    <ul class="doc-list">
+                        <li>Connessione al web in tempo reale e sinergia con Google Workspace.</li>
+                        <li>Perfetto per la ricerca di informazioni attualizzate e l'analisi di concetti scientifici o grafici.</li>
+                        <li>Rapido, schematico, performante nelle discipline STEM.</li>
                     </ul>
+                    <a href="https://gemini.google.com" target="_blank" class="btn-access">Accedi a Gemini</a>
                 </div>
             </div>
         </section>
 
         <section id="lab">
             <h2>Esercitazione Pratica (Hands-on)</h2>
-            <p>Si invitano i docenti ad aprire le piattaforme <a href="https://claude.ai" target="_blank">Claude</a> e <a href="https://gemini.google.com" target="_blank">Gemini</a> in due finestre separate per testare direttamente i comandi operativi (prompt) proposti di seguito.</p>
-            <p><em>Nota metodologica per il Prompting: strutturare sempre la richiesta secondo lo schema <strong>Ruolo + Compito + Contesto + Formato richiesto.</strong></em></p>
+            <p>Si invitano i docenti a utilizzare i comandi operativi (prompt) proposti di seguito sulle piattaforme appena presentate.</p>
+            <p><em>Nota metodologica: strutturare sempre la richiesta secondo lo schema <strong>Ruolo + Compito + Contesto + Formato richiesto.</strong></em></p>
 
             <h3>1. Progettazione di un'Unità di Apprendimento (UDA)</h3>
-            <span class="tag">Trasversale a tutte le discipline</span>
-            <div class="prompt-box">
-                Agisci come un docente esperto di [INSERIRE MATERIA] della scuola secondaria di secondo grado. Elabora una bozza strutturata per un'Unità di Apprendimento della durata di 4 ore incentrata su "[INSERIRE ARGOMENTO]". La struttura deve includere: prerequisiti, obiettivi di apprendimento (declinati in conoscenze e abilità), proposta per un'attività laboratoriale cooperativa e indicazioni per un compito di realtà finale. Restituisci il testo utilizzando elenchi puntati per favorire la leggibilità.
+            <span class="tag">Trasversale</span>
+            <div class="prompt-container">
+                <button class="btn-copy">
+                    <svg class="icon" viewBox="0 0 512 512"><path d="M384 121.9V0H27.9c-15.4 0-27.9 12.5-27.9 27.9v456.2C0 499.5 12.5 512 27.9 512h328.2c15.4 0 27.9-12.5 27.9-27.9V384H128V121.9h256zM128 352V128h224v224H128z"/></svg>
+                    Copia Prompt
+                </button>
+                <div class="prompt-box" id="prompt1">
+                    Agisci come un docente esperto di [INSERIRE MATERIA] della scuola secondaria di secondo grado. Elabora una bozza strutturata per un'Unità di Apprendimento della durata di 4 ore incentrata su "[INSERIRE ARGOMENTO]". La struttura deve includere: prerequisiti, obiettivi di apprendimento (declinati in conoscenze e abilità), proposta per un'attività laboratoriale cooperativa e indicazioni per un compito di realtà finale. Restituisci il testo utilizzando elenchi puntati.
+                </div>
             </div>
 
-            <h3>2. Differenziazione Didattica e Inclusione (BES/DSA)</h3>
+            <h3>2. Differenziazione Didattica (BES/DSA)</h3>
             <span class="tag">Didattica Inclusiva</span>
-            <div class="prompt-box">
-                Analizza il testo seguente e rielaboralo per renderlo accessibile a uno studente di 15 anni con dislessia. Applica le seguenti regole: utilizza un costrutto sintattico lineare (Soggetto, Verbo, Complemento), frasi brevi, elenchi puntati per i passaggi consequenziali ed evidenzia in grassetto esclusivamente i tre concetti fondamentali. Aggiungi in calce un breve glossario per i termini complessi.
-                <br><br>
-                Testo di partenza: [INCOLLARE IL TESTO DEL MANUALE]
+            <div class="prompt-container">
+                <button class="btn-copy">
+                    <svg class="icon" viewBox="0 0 512 512"><path d="M384 121.9V0H27.9c-15.4 0-27.9 12.5-27.9 27.9v456.2C0 499.5 12.5 512 27.9 512h328.2c15.4 0 27.9-12.5 27.9-27.9V384H128V121.9h256zM128 352V128h224v224H128z"/></svg>
+                    Copia Prompt
+                </button>
+                <div class="prompt-box" id="prompt2">
+                    Analizza il testo seguente e rielaboralo per renderlo accessibile a uno studente di 15 anni con dislessia. Applica queste regole: costrutto sintattico lineare (Soggetto, Verbo, Complemento), frasi brevi, elenchi puntati ed evidenzia in grassetto i tre concetti fondamentali. Aggiungi un breve glossario per i termini complessi.<br><br>[INCOLLARE IL TESTO]
+                </div>
             </div>
 
             <h3>3. Elaborazione di una Griglia di Valutazione</h3>
-            <span class="tag">Docimologia e Valutazione</span>
-            <div class="prompt-box">
-                Costruisci una rubrica di valutazione analitica, formattata come tabella, per la valutazione di [INSERIRE TIPOLOGIA DI PROVA, es: un debate in classe / una relazione di laboratorio / un elaborato multimediale]. Individua 4 indicatori specifici. Per ciascun indicatore, declina i descrittori su una scala di 4 livelli (da Iniziale ad Avanzato), esplicitando in modo inequivocabile le evidenze osservabili richieste per l'attribuzione di ciascun livello.
+            <span class="tag">Valutazione</span>
+            <div class="prompt-container">
+                <button class="btn-copy">
+                    <svg class="icon" viewBox="0 0 512 512"><path d="M384 121.9V0H27.9c-15.4 0-27.9 12.5-27.9 27.9v456.2C0 499.5 12.5 512 27.9 512h328.2c15.4 0 27.9-12.5 27.9-27.9V384H128V121.9h256zM128 352V128h224v224H128z"/></svg>
+                    Copia Prompt
+                </button>
+                <div class="prompt-box" id="prompt3">
+                    Costruisci una rubrica di valutazione analitica, formattata come tabella, per la valutazione di [PROVA, es: debate/relazione]. Individua 4 indicatori specifici. Per ciascun indicatore, declina i descrittori su una scala di 4 livelli (da Iniziale ad Avanzato), esplicitando le evidenze osservabili per ciascun livello.
+                </div>
             </div>
         </section>
 
         <section id="tips">
             <h2>Linee Guida e Avvertenze Deontologiche</h2>
-            <ul>
-                <li><strong>Verifica delle Fonti (Allucinazioni):</strong> I modelli generativi possono produrre informazioni plausibili ma errate (date, riferimenti bibliografici, eventi storici). È imprescindibile la validazione dei contenuti da parte del docente prima della somministrazione agli studenti.</li>
-                <li><strong>Tutela della Privacy:</strong> È severamente sconsigliato l'inserimento di dati personali, nomi, cognomi o informazioni sensibili relative agli studenti all'interno delle piattaforme di AI.</li>
-                <li><strong>Processo Iterativo:</strong> L'interazione con l'AI non si esaurisce con il primo prompt. Si suggerisce di affinare il risultato richiedendo revisioni (es. <em>"Riformula utilizzando un registro linguistico più formale", "Sintetizza in massimo 200 parole"</em>).</li>
-            </ul>
+            <div style="display: flex; align-items: flex-start; gap: 1.5rem;">
+                <img src="/api/placeholder/60/60" alt="Icona Attenzione" style="max-width: 60px; opacity: 0.6; margin-top: 5px;">
+                <ul class="doc-list">
+                    <li><strong>Verifica delle Fonti:</strong> I modelli generativi possono produrre informazioni errate. È imprescindibile la validazione dei contenuti da parte del docente.</li>
+                    <li><strong>Tutela della Privacy:</strong> È severamente sconsigliato l'inserimento di dati personali, nomi o informazioni sensibili degli studenti nelle piattaforme.</li>
+                    <li><strong>Processo Iterativo:</strong> L'interazione con l'AI è una conversazione. Si suggerisce di affinare il risultato richiedendo revisioni (es. <em>"Riformula con un registro più formale"</em>).</li>
+                </ul>
+            </div>
         </section>
 
     </div>
 
     <footer>
-        <p>&copy; 2024 - Materiale didattico a uso interno. Riproduzione e modifica consentite per finalità formative.</p>
+        <p>&copy; 2024 - Documentazione Istituzionale ad Uso Interno. Riproduzione consentita per finalità formative.</p>
     </footer>
+
+    <script>
+        document.querySelectorAll('.btn-copy').forEach(button => {
+            button.addEventListener('click', () => {
+                // Trova il box del prompt associato
+                const promptBox = button.nextElementSibling;
+                // Ottiene il testo, gestendo anche i <br> per il testo incollabile
+                const textToCopy = promptBox.innerText;
+
+                // Copia negli appunti
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Cambia temporaneamente il testo del pulsante
+                    button.innerHTML = '<svg class="icon" viewBox="0 0 512 512"><path d="M480 32l-192 192-32-32-32 32 64 64 192-192-32-32zM0 256l64 64 64-64-64-64 64 64 128-128-64-64-128 128z"/></svg> Copiato!';
+                    // Ripristina dopo 2 secondi
+                    setTimeout(() => {
+                        button.innerHTML = '<svg class="icon" viewBox="0 0 512 512"><path d="M384 121.9V0H27.9c-15.4 0-27.9 12.5-27.9 27.9v456.2C0 499.5 12.5 512 27.9 512h328.2c15.4 0 27.9-12.5 27.9-27.9V384H128V121.9h256zM128 352V128h224v224H128z"/></svg> Copia Prompt';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Errore durante la copia:', err);
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
